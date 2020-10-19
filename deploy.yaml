@@ -38,23 +38,3 @@ spec:
       port: 61616
 
   type: NodePort
-
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: secure-routing
-  annotations:
-    nginx.ingress.kubernetes.io/auth-type: basic
-    nginx.ingress.kubernetes.io/auth-secret: mycredentials
-    nginx.ingress.kubernetes.io/auth-realm: "Please make sure to enter a password!"
-
-spec:
-  rules:
-    - host: queue.facebook.com
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: fleetman-queue
-              servicePort: 8161
